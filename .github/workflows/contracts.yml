@@ -1,0 +1,28 @@
+name: Contracts
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  foundry:
+    name: Foundry tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      - name: Install forge-std
+        run: forge install foundry-rs/forge-std --no-commit
+
+      - name: Check contract formatting
+        run: forge fmt --check
+
+      - name: Run contract tests
+        run: forge test -vvv

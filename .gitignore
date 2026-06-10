@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+cache
+broadcast
+lib/*
+!lib/escrowAbi.ts
+.env
+.env.local
+coverage
+lcov.info
+dist
+.DS_Store
