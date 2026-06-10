@@ -1,8 +1,23 @@
 # Web3 Escrow Protocol
 
+[![Contracts](https://github.com/2hevva/web3-escrow-protocol/actions/workflows/contracts.yml/badge.svg)](https://github.com/2hevva/web3-escrow-protocol/actions/workflows/contracts.yml)
+[![Frontend](https://github.com/2hevva/web3-escrow-protocol/actions/workflows/frontend.yml/badge.svg)](https://github.com/2hevva/web3-escrow-protocol/actions/workflows/frontend.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 Milestone-based stablecoin escrow for remote Web3 work.
 
 This project models a practical payment flow between a client and a freelancer: the client funds the full budget in USDC, approves completed milestones, and releases payments as work is delivered. If delivery or payment becomes disputed, either participant can open a dispute and an arbiter can split the unreleased balance.
+
+## Reviewer Quick Scan
+
+If you are reviewing this as a Web3 engineering portfolio project, start here:
+
+- Contract: [`src/Web3Escrow.sol`](src/Web3Escrow.sol)
+- Contract tests: [`test/Web3Escrow.t.sol`](test/Web3Escrow.t.sol)
+- Deployment script: [`script/Deploy.s.sol`](script/Deploy.s.sol)
+- Frontend preview: [`components/EscrowDashboard.tsx`](components/EscrowDashboard.tsx)
+- CI workflows: [contracts](.github/workflows/contracts.yml) and [frontend](.github/workflows/frontend.yml)
+- Security posture: [`SECURITY.md`](SECURITY.md)
 
 ## Why This Project Matters
 
@@ -80,9 +95,24 @@ Run tests:
 forge test -vvv
 ```
 
+Run the frontend locally:
+
+```bash
+npm install
+npm run dev
+```
+
+Run project checks:
+
+```bash
+npm run typecheck
+npm run build
+npm run test:contracts
+```
+
 ## Security Notes
 
-This is a portfolio-grade prototype, not audited production software.
+This is a portfolio-grade prototype, not audited production software. See [`SECURITY.md`](SECURITY.md) for scope, assumptions, and the production-hardening checklist.
 
 Important production improvements:
 
@@ -96,12 +126,19 @@ Important production improvements:
 
 ## Roadmap
 
+### Near Term
+
+- Add OpenZeppelin `SafeERC20` and audited ownership/access-control primitives
+- Add repository topics: `solidity`, `foundry`, `nextjs`, `web3`, `escrow`, `usdc`, `remote-work`
+- Add screenshots and a short demo GIF to the README
+- Deploy to Base Sepolia or Sepolia and link contract addresses
+
+### Product Expansion
+
 - Contract factory for repeat escrow creation
 - Frontend wallet connection and live contract reads
 - IPFS evidence upload for milestone delivery files
-- Sepolia or Base Sepolia deployment
-- GitHub Actions contract test workflow
-- Screenshots and short demo GIF
+- Indexer support for dashboards and notifications
 
 ## Portfolio Positioning
 
