@@ -105,10 +105,7 @@ contract Web3Escrow {
             total += amounts_[i];
             milestones.push(
                 Milestone({
-                    amount: amounts_[i],
-                    evidenceHash: evidenceHashes_[i],
-                    approved: false,
-                    released: false
+                    amount: amounts_[i], evidenceHash: evidenceHashes_[i], approved: false, released: false
                 })
             );
         }

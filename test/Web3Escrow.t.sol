@@ -75,6 +75,22 @@ contract Web3EscrowTest is Test {
         assertEq(uint256(escrow.status()), uint256(Web3Escrow.Status.Funded));
     }
 
+    function testOnlyClientCanFund() public {
+        vm.prank(freelancer);
+        vm.expectRevert(Web3Escrow.NotClient.selector);
+        escrow.fund();
+    }
+
+    function testCannotFundTwice() public {
+        _fund();
+
+        vm.startPrank(client);
+        usdc.approve(address(escrow), FIRST + SECOND);
+        vm.expectRevert(Web3Escrow.InvalidStatus.selector);
+        escrow.fund();
+        vm.stopPrank();
+    }
+
     function testApprovedMilestoneCanBeReleased() public {
         _fund();
 
@@ -111,6 +127,30 @@ contract Web3EscrowTest is Test {
         escrow.releaseMilestone(0);
     }
 
+    function testOnlyClientCanApproveMilestone() public {
+        _fund();
+
+        vm.prank(freelancer);
+        vm.expectRevert(Web3Escrow.NotClient.selector);
+        escrow.approveMilestone(0, keccak256("not-client"));
+    }
+
+    function testCannotApproveInvalidMilestone() public {
+        _fund();
+
+        vm.prank(client);
+        vm.expectRevert(Web3Escrow.InvalidMilestone.selector);
+        escrow.approveMilestone(99, keccak256("missing"));
+    }
+
+    function testCannotReleaseInvalidMilestone() public {
+        _fund();
+
+        vm.prank(freelancer);
+        vm.expectRevert(Web3Escrow.InvalidMilestone.selector);
+        escrow.releaseMilestone(99);
+    }
+
     function testArbiterResolvesDispute() public {
         _fund();
 
@@ -125,6 +165,36 @@ contract Web3EscrowTest is Test {
         assertEq(uint256(escrow.status()), uint256(Web3Escrow.Status.Completed));
     }
 
+    function testOnlyParticipantCanOpenDispute() public {
+        _fund();
+
+        vm.prank(arbiter);
+        vm.expectRevert(Web3Escrow.NotParticipant.selector);
+        escrow.openDispute("not a participant");
+    }
+
+    function testOnlyArbiterCanResolveDispute() public {
+        _fund();
+
+        vm.prank(client);
+        escrow.openDispute("scope disagreement");
+
+        vm.prank(client);
+        vm.expectRevert(Web3Escrow.NotArbiter.selector);
+        escrow.resolveDispute(1_500e6, 1_500e6);
+    }
+
+    function testDisputeResolutionMustMatchRemainingBalance() public {
+        _fund();
+
+        vm.prank(freelancer);
+        escrow.openDispute("client is unresponsive");
+
+        vm.prank(arbiter);
+        vm.expectRevert(Web3Escrow.InvalidInput.selector);
+        escrow.resolveDispute(1_000e6, 1_000e6);
+    }
+
     function testClientCanRefundUnreleasedBalance() public {
         _fund();
 
@@ -133,6 +203,46 @@ contract Web3EscrowTest is Test {
 
         assertEq(usdc.balanceOf(client), FIRST + SECOND);
         assertEq(uint256(escrow.status()), uint256(Web3Escrow.Status.Cancelled));
+    }
+
+    function testClientCanCancelBeforeFunding() public {
+        vm.prank(client);
+        escrow.cancelBeforeFunding();
+
+        assertEq(uint256(escrow.status()), uint256(Web3Escrow.Status.Cancelled));
+    }
+
+    function testCannotRefundBeforeFunding() public {
+        vm.prank(client);
+        vm.expectRevert(Web3Escrow.InvalidStatus.selector);
+        escrow.cancelAndRefund();
+    }
+
+    function testConstructorRejectsInvalidInputs() public {
+        uint256[] memory amounts = new uint256[](1);
+        amounts[0] = FIRST;
+
+        bytes32[] memory hashes = new bytes32[](1);
+        hashes[0] = keccak256("scope");
+
+        vm.expectRevert(Web3Escrow.InvalidAddress.selector);
+        new Web3Escrow(address(0), freelancer, arbiter, amounts, hashes);
+
+        vm.expectRevert(Web3Escrow.InvalidAddress.selector);
+        new Web3Escrow(address(usdc), address(0), arbiter, amounts, hashes);
+
+        uint256[] memory emptyAmounts = new uint256[](0);
+        bytes32[] memory emptyHashes = new bytes32[](0);
+        vm.expectRevert(Web3Escrow.InvalidInput.selector);
+        new Web3Escrow(address(usdc), freelancer, arbiter, emptyAmounts, emptyHashes);
+
+        bytes32[] memory mismatchedHashes = new bytes32[](2);
+        vm.expectRevert(Web3Escrow.InvalidInput.selector);
+        new Web3Escrow(address(usdc), freelancer, arbiter, amounts, mismatchedHashes);
+
+        amounts[0] = 0;
+        vm.expectRevert(Web3Escrow.InvalidInput.selector);
+        new Web3Escrow(address(usdc), freelancer, arbiter, amounts, hashes);
     }
 
     function _fund() private {

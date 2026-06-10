@@ -19,6 +19,12 @@ If you are reviewing this as a Web3 engineering portfolio project, start here:
 - CI workflows: [contracts](.github/workflows/contracts.yml) and [frontend](.github/workflows/frontend.yml)
 - Security posture: [`SECURITY.md`](SECURITY.md)
 
+## Demo Preview
+
+![Web3 Escrow dashboard preview](assets/demo-preview.svg)
+
+The frontend preview focuses on the core product workflow a remote Web3 team would care about: funded balance, participants, milestone state, and dispute actions.
+
 ## Why This Project Matters
 
 Remote crypto work often fails around trust, milestone clarity, and payment timing. This protocol demonstrates how a small smart contract can reduce that friction with transparent state transitions and stablecoin settlement.
@@ -110,6 +116,16 @@ npm run build
 npm run test:contracts
 ```
 
+## Testnet Deployment
+
+The deployment script reads its configuration from environment variables. Copy the example file and fill in your own testnet values:
+
+```bash
+cp .env.example .env
+```
+
+See [`docs/deployment.md`](docs/deployment.md) for Base Sepolia and Sepolia deployment commands, verification notes, and the post-deploy checklist.
+
 ## Security Notes
 
 This is a portfolio-grade prototype, not audited production software. See [`SECURITY.md`](SECURITY.md) for scope, assumptions, and the production-hardening checklist.
@@ -130,7 +146,6 @@ Important production improvements:
 
 - Add OpenZeppelin `SafeERC20` and audited ownership/access-control primitives
 - Add repository topics: `solidity`, `foundry`, `nextjs`, `web3`, `escrow`, `usdc`, `remote-work`
-- Add screenshots and a short demo GIF to the README
 - Deploy to Base Sepolia or Sepolia and link contract addresses
 
 ### Product Expansion
@@ -139,6 +154,7 @@ Important production improvements:
 - Frontend wallet connection and live contract reads
 - IPFS evidence upload for milestone delivery files
 - Indexer support for dashboards and notifications
+- Record a short wallet-connected demo GIF after testnet deployment
 
 ## Portfolio Positioning
 

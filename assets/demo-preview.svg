@@ -1,0 +1,45 @@
+<svg width="1280" height="760" viewBox="0 0 1280 760" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Web3 Escrow dashboard preview</title>
+  <desc id="desc">A dark dashboard mockup showing a funded USDC escrow, participants, milestone states, and protocol workflow.</desc>
+  <rect width="1280" height="760" fill="#07130f"/>
+  <rect x="70" y="70" width="1140" height="620" rx="20" fill="#0d2119" stroke="#224637"/>
+  <text x="118" y="150" fill="#9fc6b5" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="2">REMOTE WORK ESCROW</text>
+  <text x="118" y="215" fill="#edfdf5" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="800">Milestone-based USDC payments</text>
+  <text x="118" y="262" fill="#c8e8d9" font-family="Arial, Helvetica, sans-serif" font-size="24">Client funds once. Milestones release as delivery is approved.</text>
+
+  <rect x="118" y="326" width="250" height="84" rx="12" fill="#123226" stroke="#224637"/>
+  <text x="142" y="360" fill="#9fc6b5" font-family="Arial, Helvetica, sans-serif" font-size="17">Escrow balance</text>
+  <text x="142" y="392" fill="#edfdf5" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="800">4,500 USDC</text>
+
+  <rect x="392" y="326" width="250" height="84" rx="12" fill="#123226" stroke="#224637"/>
+  <text x="416" y="360" fill="#9fc6b5" font-family="Arial, Helvetica, sans-serif" font-size="17">Released</text>
+  <text x="416" y="392" fill="#edfdf5" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="800">1,000 USDC</text>
+
+  <rect x="118" y="462" width="524" height="20" rx="10" fill="#07130f"/>
+  <rect x="118" y="462" width="325" height="20" rx="10" fill="#3ee08f"/>
+  <text x="118" y="525" fill="#edfdf5" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800">Fund -> Approve -> Release -> Resolve</text>
+  <text x="118" y="562" fill="#c8e8d9" font-family="Arial, Helvetica, sans-serif" font-size="19">Explicit state transitions, arbiter dispute flow, and Foundry-tested money movement.</text>
+
+  <rect x="730" y="138" width="382" height="484" rx="16" fill="#091a14" stroke="#224637"/>
+  <text x="760" y="190" fill="#9fc6b5" font-family="Arial, Helvetica, sans-serif" font-size="18">Project status</text>
+  <rect x="986" y="164" width="86" height="34" rx="17" fill="#113b29" stroke="#3ee08f"/>
+  <text x="1008" y="187" fill="#8ff7bd" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800">Funded</text>
+  <text x="760" y="244" fill="#edfdf5" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="800">4,500 USDC</text>
+
+  <rect x="760" y="292" width="322" height="70" rx="10" fill="#123226" stroke="#224637"/>
+  <text x="784" y="322" fill="#edfdf5" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800">Scope and wireframes</text>
+  <text x="784" y="347" fill="#9fc6b5" font-family="Arial, Helvetica, sans-serif" font-size="16">1,000 USDC released</text>
+
+  <rect x="760" y="382" width="322" height="70" rx="10" fill="#123226" stroke="#224637"/>
+  <text x="784" y="412" fill="#edfdf5" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800">Smart contract delivery</text>
+  <text x="784" y="437" fill="#9fc6b5" font-family="Arial, Helvetica, sans-serif" font-size="16">2,000 USDC approved</text>
+
+  <rect x="760" y="472" width="322" height="70" rx="10" fill="#123226" stroke="#224637"/>
+  <text x="784" y="502" fill="#edfdf5" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800">Frontend integration</text>
+  <text x="784" y="527" fill="#f7c948" font-family="Arial, Helvetica, sans-serif" font-size="16">2,500 USDC pending</text>
+
+  <rect x="760" y="570" width="150" height="42" rx="8" fill="#3ee08f"/>
+  <text x="790" y="597" fill="#062014" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="800">Approve</text>
+  <rect x="930" y="570" width="152" height="42" rx="8" fill="#18382c" stroke="#224637"/>
+  <text x="962" y="597" fill="#edfdf5" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="800">Dispute</text>
+</svg>
