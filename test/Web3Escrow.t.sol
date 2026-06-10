@@ -1,8 +1,24 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-import "forge-std/Test.sol";
 import "../src/Web3Escrow.sol";
+
+interface Vm {
+    function prank(address sender) external;
+    function startPrank(address sender) external;
+    function stopPrank() external;
+    function expectRevert(bytes4 selector) external;
+}
+
+contract MinimalTest {
+    error AssertionFailed(uint256 actual, uint256 expected);
+
+    Vm internal constant vm = Vm(address(uint160(uint256(keccak256("hevm cheat code")))));
+
+    function assertEq(uint256 actual, uint256 expected) internal pure {
+        if (actual != expected) revert AssertionFailed(actual, expected);
+    }
+}
 
 contract MockUSDC {
     string public constant name = "Mock USDC";
@@ -38,7 +54,7 @@ contract MockUSDC {
     }
 }
 
-contract Web3EscrowTest is Test {
+contract Web3EscrowTest is MinimalTest {
     MockUSDC private usdc;
     Web3Escrow private escrow;
 
